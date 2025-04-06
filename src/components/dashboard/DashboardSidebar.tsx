@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
@@ -23,11 +22,16 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
         
         if (!session) return;
         
-        const { data: roles } = await supabase
-          .from("user_roles")
-          .select()
-          .eq("user_id", session.user.id)
-          .eq("role", "admin");
+        const { data: roles, error } = await supabase
+          .from('user_roles')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .eq('role', 'admin');
+        
+        if (error) {
+          console.error("Error fetching admin roles:", error);
+          return;
+        }
         
         if (roles && roles.length > 0) {
           setIsAdmin(true);
@@ -68,7 +72,6 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
     },
   ];
   
-  // Admin items to conditionally display
   const adminItems = [
     {
       label: "Admin Panel",
@@ -113,7 +116,6 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
               </Link>
             ))}
             
-            {/* Conditionally render admin items */}
             {isAdmin && (
               <div className="pt-2 mt-2 border-t border-gray-200">
                 {adminItems.map((item) => (
@@ -137,7 +139,6 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
         </ScrollArea>
       </aside>
       
-      {/* Backdrop for mobile */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-10 md:hidden"

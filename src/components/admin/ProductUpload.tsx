@@ -76,7 +76,7 @@ const ProductUpload = () => {
       
       // 1. Add product to database
       const { data: product, error: productError } = await supabase
-        .from("products")
+        .from('products')
         .insert({
           name: data.name,
           description: data.description,
@@ -92,7 +92,7 @@ const ProductUpload = () => {
 
       // 2. Upload image to storage
       const file = data.image[0];
-      if (file) {
+      if (file && product) {
         const fileExt = file.name.split('.').pop();
         const fileName = `${uuidv4()}.${fileExt}`;
         const filePath = `${fileName}`;

@@ -23,22 +23,29 @@ const ProductList = () => {
     const fetchProducts = async () => {
       try {
         const { data, error } = await supabase
-          .from("products")
-          .select("*");
+          .from('products')
+          .select('*');
           
         if (error) throw error;
         
         // For each product, fetch its primary image
-        const productsWithImages = await Promise.all(data.map(async (product) => {
+        const productsWithImages = await Promise.all((data || []).map(async (product: any) => {
           const { data: images } = await supabase
-            .from("product_images")
-            .select("url")
-            .eq("product_id", product.id)
-            .eq("is_primary", true)
+            .from('product_images')
+            .select('url')
+            .eq('product_id', product.id)
+            .eq('is_primary', true)
             .single();
             
           return {
             ...product,
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            basePrice: product.base_price,
+            stock: product.stock,
+            category: product.category,
+            sizes: product.sizes,
             images: images ? [images.url] : [],
           } as Product;
         }));
@@ -62,9 +69,9 @@ const ProductList = () => {
   const handleDeleteProduct = async (id: string) => {
     try {
       const { error } = await supabase
-        .from("products")
+        .from('products')
         .delete()
-        .eq("id", id);
+        .eq('id', id);
         
       if (error) throw error;
       

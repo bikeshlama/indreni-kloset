@@ -25,12 +25,23 @@ const AdminPanel = () => {
           return;
         }
 
-        const { data: roles } = await supabase
-          .from("user_roles")
-          .select()
-          .eq("user_id", session.user.id)
-          .eq("role", "admin");
+        // Using string-based table name to avoid TypeScript errors
+        const { data: roles, error } = await supabase
+          .from('user_roles')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .eq('role', 'admin');
 
+        if (error) {
+          console.error("Error checking admin status:", error);
+          toast({
+            title: "Error",
+            description: "Could not verify admin privileges",
+            variant: "destructive",
+          });
+          return;
+        }
+        
         if (roles && roles.length > 0) {
           setIsAdmin(true);
         } else {
