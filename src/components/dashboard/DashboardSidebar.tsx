@@ -1,9 +1,11 @@
 
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Package, ShoppingCart, Settings, User, X } from "lucide-react";
+import { Home, Package, ShoppingCart, Settings, User, Shield, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { supabase } from "@/integrations/supabase/client";
 
 interface DashboardSidebarProps {
   isOpen: boolean;
@@ -12,6 +14,31 @@ interface DashboardSidebarProps {
 
 const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
   const location = useLocation();
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) return;
+        
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select()
+          .eq("user_id", session.user.id)
+          .eq("role", "admin");
+        
+        if (roles && roles.length > 0) {
+          setIsAdmin(true);
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+    };
+    
+    checkAdminStatus();
+  }, []);
   
   const navItems = [
     {
@@ -38,6 +65,15 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
       label: "Settings",
       icon: <Settings className="w-5 h-5" />,
       href: "/dashboard/settings",
+    },
+  ];
+  
+  // Admin items to conditionally display
+  const adminItems = [
+    {
+      label: "Admin Panel",
+      icon: <Shield className="w-5 h-5" />,
+      href: "/dashboard/admin",
     },
   ];
 
@@ -76,6 +112,27 @@ const DashboardSidebar = ({ isOpen, toggleSidebar }: DashboardSidebarProps) => {
                 <span className={cn(isOpen ? "block" : "hidden md:hidden")}>{item.label}</span>
               </Link>
             ))}
+            
+            {/* Conditionally render admin items */}
+            {isAdmin && (
+              <div className="pt-2 mt-2 border-t border-gray-200">
+                {adminItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all",
+                      location.pathname === item.href
+                        ? "bg-navy text-white"
+                        : "text-gray-700 hover:bg-gray-100"
+                    )}
+                  >
+                    <span>{item.icon}</span>
+                    <span className={cn(isOpen ? "block" : "hidden md:hidden")}>{item.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </ScrollArea>
       </aside>

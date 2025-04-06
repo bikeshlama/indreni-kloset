@@ -13,6 +13,7 @@ import DashboardHome from "./pages/dashboard/DashboardHome";
 import ProductsPage from "./pages/dashboard/ProductsPage";
 import OrdersPage from "./pages/dashboard/OrdersPage";
 import AccountPage from "./pages/dashboard/AccountPage";
+import AdminPanel from "./pages/dashboard/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="products" element={<ProductsPage />} />
             <Route path="orders" element={<OrdersPage />} />
             <Route path="account" element={<AccountPage />} />
+            <Route path="admin" element={<AdminPanel />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
