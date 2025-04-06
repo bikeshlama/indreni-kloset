@@ -91,7 +91,7 @@ const ProductUpload = () => {
       if (productError) throw productError;
 
       // 2. Upload image to storage
-      const file = data.image[0];
+      const file = data.image?.[0];
       if (file && product) {
         const fileExt = file.name.split('.').pop();
         const fileName = `${uuidv4()}.${fileExt}`;
