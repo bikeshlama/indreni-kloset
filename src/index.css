@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -54,23 +54,71 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
 }
 
 @layer components {
   .navy-gradient {
-    @apply bg-gradient-to-br from-navy to-navy/80;
+    @apply bg-gradient-to-br from-navy to-navy-light;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-500 hover:shadow-xl hover:-translate-y-2;
   }
 
   .animate-fade {
     @apply animate-fade-in;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-navy via-navy-light to-navy bg-clip-text text-transparent;
+  }
+
+  .btn-hover-effect {
+    @apply relative overflow-hidden transition-all duration-300 before:absolute before:inset-0 before:z-0 before:bg-white/20 before:translate-x-[-110%] hover:before:translate-x-0 before:transition-transform before:duration-500 before:ease-out;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md shadow-lg border border-white/20;
+  }
+
+  .stagger-animate > * {
+    animation-fill-mode: both;
+    opacity: 0;
+  }
+
+  .stagger-animate > *:nth-child(1) {
+    animation: slide-up 0.5s ease-out 0.1s forwards;
+  }
+  .stagger-animate > *:nth-child(2) {
+    animation: slide-up 0.5s ease-out 0.2s forwards;
+  }
+  .stagger-animate > *:nth-child(3) {
+    animation: slide-up 0.5s ease-out 0.3s forwards;
+  }
+  .stagger-animate > *:nth-child(4) {
+    animation: slide-up 0.5s ease-out 0.4s forwards;
+  }
+  .stagger-animate > *:nth-child(5) {
+    animation: slide-up 0.5s ease-out 0.5s forwards;
+  }
+  .stagger-animate > *:nth-child(6) {
+    animation: slide-up 0.5s ease-out 0.6s forwards;
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
