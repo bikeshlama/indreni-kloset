@@ -8,10 +8,13 @@ import { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProductsPage from "./pages/ProductsPage";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DashboardHome from "./pages/dashboard/DashboardHome";
-import ProductsPage from "./pages/dashboard/ProductsPage";
+import ProductsPage as DashboardProductsPage from "./pages/dashboard/ProductsPage";
 import OrdersPage from "./pages/dashboard/OrdersPage";
 import AccountPage from "./pages/dashboard/AccountPage";
 import AdminPanel from "./pages/dashboard/AdminPanel";
@@ -29,11 +32,14 @@ const App = () => (
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             
             {/* Dashboard Routes */}
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DashboardHome />} />
-              <Route path="products" element={<ProductsPage />} />
+              <Route path="products" element={<DashboardProductsPage />} />
               <Route path="orders" element={<OrdersPage />} />
               <Route path="account" element={<AccountPage />} />
               <Route path="admin" element={<AdminPanel />} />

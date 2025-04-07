@@ -1,5 +1,5 @@
 
-import { Bell, User, Menu } from "lucide-react";
+import { Bell, User, Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface DashboardHeaderProps {
   toggleSidebar: () => void;
@@ -18,13 +19,23 @@ interface DashboardHeaderProps {
 const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signOut } = useAuth();
   
-  const handleLogout = () => {
-    // This would be replaced with actual logout logic
-    toast({
-      title: "Logged out successfully",
-    });
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Logged out successfully",
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast({
+        variant: "destructive",
+        title: "Logout failed",
+        description: "There was an error logging out. Please try again.",
+      });
+    }
   };
 
   return (
@@ -57,6 +68,7 @@ const DashboardHeader = ({ toggleSidebar }: DashboardHeaderProps) => {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>

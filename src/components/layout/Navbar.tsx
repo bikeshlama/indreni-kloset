@@ -1,13 +1,43 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, ShoppingCart } from "lucide-react";
+import { Menu, X, User, ShoppingCart, LogOut } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from '@/hooks/use-toast';
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Logged out successfully",
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast({
+        variant: "destructive",
+        title: "Logout failed",
+        description: "There was an error logging out. Please try again.",
+      });
+    }
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -30,13 +60,40 @@ const Navbar = () => {
             <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-navy">
               Contact
             </Link>
+            
             <div className="ml-4 flex items-center space-x-2">
-              <Button variant="outline" size="sm" className="border-indigo-500 text-indigo-600 hover:bg-indigo-50" asChild>
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700" asChild>
-                <Link to="/register">Join as Reseller</Link>
-              </Button>
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="border-indigo-500 text-indigo-600 hover:bg-indigo-50">
+                      <User className="mr-2 h-4 w-4" />
+                      My Account
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate("/dashboard/account")}>
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
+                  <Button variant="outline" size="sm" className="border-indigo-500 text-indigo-600 hover:bg-indigo-50" asChild>
+                    <Link to="/login">Login</Link>
+                  </Button>
+                  <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700" asChild>
+                    <Link to="/register">Join as Reseller</Link>
+                  </Button>
+                </>
+              )}
             </div>
           </div>
 
@@ -66,22 +123,31 @@ const Navbar = () => {
               Contact
             </Link>
             <div className="pt-4 pb-3 border-t border-gray-200">
-              <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
-                  <User className="h-6 w-6 text-navy" />
+              {user ? (
+                <div>
+                  <Link to="/dashboard" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
+                    Dashboard
+                  </Link>
+                  <Link to="/dashboard/account" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
+                    Profile
+                  </Link>
+                  <button 
+                    onClick={handleLogout}
+                    className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
                 </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">Account</div>
+              ) : (
+                <div>
+                  <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-navy">
+                    Login
+                  </Link>
+                  <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700">
+                    Join as Reseller
+                  </Link>
                 </div>
-              </div>
-              <div className="mt-3 px-2 space-y-1">
-                <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-navy">
-                  Login
-                </Link>
-                <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700">
-                  Join as Reseller
-                </Link>
-              </div>
+              )}
             </div>
           </div>
         </div>

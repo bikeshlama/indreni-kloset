@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, LogIn, Mail, Lock, Eye, EyeOff } from "lucide-react";
@@ -116,14 +116,6 @@ const LoginForm = () => {
           </Button>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-center border-t border-indigo-50 pt-4">
-        <p className="text-sm text-gray-600">
-          Don't have an account?{" "}
-          <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
-            Sign up as a reseller
-          </Link>
-        </p>
-      </CardFooter>
     </Card>
   );
 };
