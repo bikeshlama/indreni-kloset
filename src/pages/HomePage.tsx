@@ -73,7 +73,7 @@ const HomePage = () => {
       {isAdmin && (
         <div className="bg-indigo-900 text-white py-2 text-center">
           <Link to="/dashboard/admin">
-            <Button variant="outline" className="text-white border-white hover:bg-indigo-800">
+            <Button variant="outline" className="text-white bg-indigo-700 border-white hover:bg-indigo-800">
               <Shield className="mr-2 h-4 w-4" />
               Access Admin Panel
             </Button>

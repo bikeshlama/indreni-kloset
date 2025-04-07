@@ -31,10 +31,10 @@ const Navbar = () => {
               Contact
             </Link>
             <div className="ml-4 flex items-center space-x-2">
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="border-indigo-500 text-indigo-600 hover:bg-indigo-50" asChild>
                 <Link to="/login">Login</Link>
               </Button>
-              <Button size="sm" className="bg-navy hover:bg-navy/90" asChild>
+              <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700" asChild>
                 <Link to="/register">Join as Reseller</Link>
               </Button>
             </div>
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-navy">
                   Login
                 </Link>
-                <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-navy hover:text-white">
+                <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700">
                   Join as Reseller
                 </Link>
               </div>

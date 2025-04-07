@@ -35,21 +35,21 @@ const CTASection = () => {
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <Button size="lg" className="bg-white text-indigo-900 hover:bg-indigo-50 group" asChild>
+            <Button size="lg" className="bg-indigo-400 text-indigo-950 hover:bg-indigo-300 font-medium shadow-lg group" asChild>
               <Link to="/register" className="flex items-center justify-center">
                 Join as a Reseller
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 group" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900 group" asChild>
               <Link to="/contact" className="flex items-center justify-center">
                 <Phone className="mr-2 h-4 w-4 group-hover:animate-pulse" />
                 Contact Us
               </Link>
             </Button>
             
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 group" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900 group" asChild>
               <Link to="/support" className="flex items-center justify-center">
                 <MessageSquare className="mr-2 h-4 w-4" />
                 Chat With Support

@@ -67,14 +67,14 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button size="lg" className="bg-white text-indigo-900 hover:bg-indigo-100" asChild>
+              <Button size="lg" className="bg-indigo-400 hover:bg-indigo-500 text-indigo-950 font-medium shadow-lg" asChild>
                 <Link to="/register" className="group">
                   Join as a Reseller
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900" asChild>
                 <Link to="/login">Login</Link>
               </Button>
             </div>
