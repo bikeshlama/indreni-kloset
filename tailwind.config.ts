@@ -159,6 +159,20 @@ export default {
 				'pulse-soft': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.8' }
+				},
+				blob: {
+					'0%': {
+						transform: 'translate(0px, 0px) scale(1)'
+					},
+					'33%': {
+						transform: 'translate(30px, -50px) scale(1.1)'
+					},
+					'66%': {
+						transform: 'translate(-20px, 20px) scale(0.9)'
+					},
+					'100%': {
+						transform: 'translate(0px, 0px) scale(1)'
+					}
 				}
 			},
 			animation: {
@@ -171,9 +185,27 @@ export default {
 				'slide-up': 'slide-up 0.6s ease-out',
 				'zoom-in': 'zoom-in 0.5s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'pulse-soft': 'pulse-soft 3s infinite ease-in-out'
-			}
+				'pulse-soft': 'pulse-soft 3s infinite ease-in-out',
+				'blob': 'blob 7s infinite ease-in-out',
+			},
+			transitionDelay: {
+				'2000': '2000ms',
+				'4000': '4000ms',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function ({ addUtilities }) {
+			const newUtilities = {
+				'.animation-delay-2000': {
+					'animation-delay': '2s',
+				},
+				'.animation-delay-4000': {
+					'animation-delay': '4s',
+				},
+			}
+			addUtilities(newUtilities)
+		},
+	],
 } satisfies Config;
