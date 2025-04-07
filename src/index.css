@@ -16,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
-    --primary: 220 79% 13%;
+    --primary: 238 63% 27%;
     --primary-foreground: 210 40% 98%;
     
     --secondary: 210 40% 96.1%;
@@ -63,8 +63,12 @@
 }
 
 @layer components {
-  .navy-gradient {
-    @apply bg-gradient-to-br from-navy to-navy-light;
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .indigo-gradient {
+    @apply bg-gradient-to-br from-indigo-900 to-indigo-800;
   }
 
   .card-hover {
@@ -76,7 +80,7 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-navy via-navy-light to-navy bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-indigo-900 via-purple-700 to-indigo-800 bg-clip-text text-transparent;
   }
 
   .btn-hover-effect {
@@ -120,5 +124,54 @@
   .animate-on-scroll.in-view {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Slide up animation keyframes */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Wave animation */
+.wave {
+  animation: wave 3s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
