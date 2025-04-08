@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, UserPlus, Mail, Lock, Eye, EyeOff, User } from "lucide-react";
+import { Loader2, UserPlus, Mail, Lock, Eye, EyeOff, User, Phone, Home } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
 const RegisterForm = () => {
@@ -16,6 +16,8 @@ const RegisterForm = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    phoneNumber: "",
+    address: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -47,6 +49,8 @@ const RegisterForm = () => {
       await signUp(formData.email, formData.password, {
         data: {
           full_name: formData.fullName,
+          phone_number: formData.phoneNumber,
+          address: formData.address,
         }
       });
       
@@ -110,6 +114,40 @@ const RegisterForm = () => {
                 placeholder="you@example.com"
                 required
                 value={formData.email}
+                onChange={handleChange}
+                className="border-indigo-100 focus:border-indigo-300 pl-10"
+              />
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="phoneNumber" className="text-gray-700 font-medium">Phone Number</Label>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+              <Input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="tel"
+                placeholder="+977 9812345678"
+                required
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className="border-indigo-100 focus:border-indigo-300 pl-10"
+              />
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="address" className="text-gray-700 font-medium">Address</Label>
+            <div className="relative">
+              <Home className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+              <Input
+                id="address"
+                name="address"
+                type="text"
+                placeholder="Your full address"
+                required
+                value={formData.address}
                 onChange={handleChange}
                 className="border-indigo-100 focus:border-indigo-300 pl-10"
               />
