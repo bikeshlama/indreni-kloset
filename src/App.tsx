@@ -14,7 +14,7 @@ import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DashboardHome from "./pages/dashboard/DashboardHome";
-import ProductsPage as DashboardProductsPage from "./pages/dashboard/ProductsPage";
+import { default as DashboardProductsPage } from "./pages/dashboard/ProductsPage";
 import OrdersPage from "./pages/dashboard/OrdersPage";
 import AccountPage from "./pages/dashboard/AccountPage";
 import AdminPanel from "./pages/dashboard/AdminPanel";
