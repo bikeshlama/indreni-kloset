@@ -86,7 +86,7 @@ const Navbar = () => {
                 </DropdownMenu>
               ) : (
                 <>
-                  <Button variant="outline" size="sm" className="border-indigo-500 text-indigo-600 hover:bg-indigo-50" asChild>
+                  <Button size="sm" className="bg-white border border-indigo-500 text-indigo-600 hover:bg-indigo-50" asChild>
                     <Link to="/login">Login</Link>
                   </Button>
                   <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700" asChild>
@@ -140,7 +140,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <div>
-                  <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-navy">
+                  <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium bg-white text-indigo-600 border border-indigo-500 hover:bg-indigo-50 mb-2">
                     Login
                   </Link>
                   <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700">
