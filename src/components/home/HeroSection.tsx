@@ -31,7 +31,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative min-h-[92vh] flex items-center overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-[10%] w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl animate-pulse-soft"></div>
@@ -50,8 +50,8 @@ const HeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className={`space-y-8 text-center md:text-left ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
+        <div className="flex justify-center">
+          <div className={`max-w-3xl space-y-8 text-center ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90">
               <Sparkles className="h-4 w-4" />
               <span className="text-sm font-medium">Transform Your Fashion Business</span>
@@ -61,12 +61,12 @@ const HeroSection = () => {
               Scale Your <span className="text-indigo-300">Fashion</span> Reselling Business
             </h1>
             
-            <p className="text-xl text-indigo-100 max-w-xl">
+            <p className="text-xl text-indigo-100 mx-auto">
               Join our curated platform designed for fashion entrepreneurs. Browse premium products, 
               set your prices, and we'll handle the inventory and logistics.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-indigo-400 hover:bg-indigo-500 text-indigo-950 font-medium shadow-lg" asChild>
                 <Link to="/register" className="group">
                   Join as a Reseller
@@ -77,40 +77,6 @@ const HeroSection = () => {
               <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900" asChild>
                 <Link to="/login">Login</Link>
               </Button>
-            </div>
-          </div>
-          
-          <div className={`hidden md:block transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
-            <div className="relative">
-              {/* Decorative elements */}
-              <div className="absolute -left-10 -top-10 w-40 h-40 bg-indigo-400/20 rounded-lg rotate-12 blur-sm"></div>
-              <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-400/20 rounded-lg -rotate-12 blur-sm"></div>
-              
-              {/* Hero image */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-3 rounded-2xl shadow-2xl border border-white/20 relative z-10">
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Fashion Reseller Platform" 
-                  className="w-full rounded-lg shadow-inner"
-                />
-              </div>
-              
-              {/* Stats overlay */}
-              <div className="absolute top-5 -right-10 bg-white rounded-lg shadow-lg p-4 z-20 rotate-6 animate-float">
-                <div className="text-sm font-semibold text-gray-800">Monthly Sales</div>
-                <div className="text-2xl font-bold text-indigo-900">$12,486</div>
-                <div className="text-xs text-green-600 flex items-center gap-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
-                    <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
-                  </svg>
-                  18% from last month
-                </div>
-              </div>
-              
-              <div className="absolute -bottom-8 -left-8 bg-white rounded-lg shadow-lg p-4 z-20 -rotate-3 animate-float animation-delay-300">
-                <div className="text-sm font-semibold text-gray-800">New Customers</div>
-                <div className="text-2xl font-bold text-indigo-900">+248</div>
-              </div>
             </div>
           </div>
         </div>
