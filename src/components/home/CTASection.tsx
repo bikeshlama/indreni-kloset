@@ -42,14 +42,14 @@ const CTASection = () => {
               </Link>
             </Button>
             
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900 group" asChild>
+            <Button size="lg" className="bg-white text-indigo-900 border-2 border-white hover:bg-indigo-50 group" asChild>
               <Link to="/contact" className="flex items-center justify-center">
                 <Phone className="mr-2 h-4 w-4 group-hover:animate-pulse" />
                 Contact Us
               </Link>
             </Button>
             
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-indigo-900 group" asChild>
+            <Button size="lg" className="bg-white text-indigo-900 border-2 border-white hover:bg-indigo-50 group" asChild>
               <Link to="/support" className="flex items-center justify-center">
                 <MessageSquare className="mr-2 h-4 w-4" />
                 Chat With Support
